@@ -30,8 +30,8 @@ mlflow.set_tracking_uri(TRACKING_URI)
 os.environ["MLFLOW_TRACKING_USERNAME"] = os.environ.get("DAGSHUB_USERNAME", "iqbalrza")
 os.environ["MLFLOW_TRACKING_PASSWORD"] = os.environ.get("DAGSHUB_TOKEN", "")
 
-EXPERIMENT_NAME = "Telco Churn CI Pipeline"
-mlflow.set_experiment(EXPERIMENT_NAME)
+experiment_name = os.environ.get("MLFLOW_EXPERIMENT_NAME", "Telco Churn CI Pipeline")
+mlflow.set_experiment(experiment_name)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "telco_churn_preprocessing")

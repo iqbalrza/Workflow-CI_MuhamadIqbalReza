@@ -51,9 +51,12 @@ jobs:
           MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
           DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
           DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+          MLFLOW_EXPERIMENT_NAME: "Telco Churn CI Pipeline"
         run: |
           cd MLProject
-          mlflow run . --env-manager=local -P n_estimators=200 -P max_depth=10
+          mlflow run . --env-manager=local \
+            --experiment-name "Telco Churn CI Pipeline" \
+            -P n_estimators=200 -P max_depth=10
 
       - name: Get latest MLflow run_id
         env:
