@@ -26,7 +26,7 @@ REPO_NAME        = "Workflow-CI_MuhamadIqbalReza"
 EXPERIMENT_NAME  = "Telco Churn CI Pipeline"
 
 dagshub.init(
-    repo_owner=DAGSHUB_USERNAME,
+    repo_owner=os.environ["DAGSHUB_USERNAME"],
     repo_name=REPO_NAME,
     mlflow=True
 )
