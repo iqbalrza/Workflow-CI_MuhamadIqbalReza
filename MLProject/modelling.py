@@ -21,7 +21,7 @@ from sklearn.metrics import (
     recall_score, f1_score, roc_auc_score
 )
 
-DAGSHUB_USERNAME = os.environ.get("DAGSHUB_USERNAME", "USERNAME-DAGSHUB-ANDA")
+DAGSHUB_USERNAME = os.environ.get("DAGSHUB_USERNAME", "iqbalrza")
 REPO_NAME        = "Workflow-CI_MuhamadIqbalReza"
 EXPERIMENT_NAME  = "Telco Churn CI Pipeline"
 
