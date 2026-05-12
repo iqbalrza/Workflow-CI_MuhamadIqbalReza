@@ -47,9 +47,8 @@ jobs:
 
       - name: Run mlflow project
         env:
-          MLFLOW_TRACKING_URI: https://dagshub.com/iqbalrza/Workflow-CI_MuhamadIqbalReza.mlflow
-          MLFLOW_TRACKING_USERNAME: iqbalrza
-          MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
+          DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
+          DAGSHUB_USER_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
           cd MLProject
           mlflow run . --env-manager=local -P n_estimators=200 -P max_depth=10
