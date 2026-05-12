@@ -28,7 +28,6 @@ EXPERIMENT_NAME = "Telco Churn CI Pipeline"
 dagshub.init(
     repo_owner=REPO_OWNER,
     repo_name=REPO_NAME,
-    mlflow=True
 )
 
 mlflow.set_experiment(EXPERIMENT_NAME)
