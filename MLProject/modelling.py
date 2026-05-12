@@ -30,8 +30,6 @@ dagshub.init(
     repo_name=REPO_NAME,
 )
 
-mlflow.set_experiment(EXPERIMENT_NAME)
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "telco_churn_preprocessing")
 
