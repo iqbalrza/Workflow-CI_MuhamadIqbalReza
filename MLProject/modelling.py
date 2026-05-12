@@ -21,11 +21,7 @@ from sklearn.metrics import (
     recall_score, f1_score, roc_auc_score
 )
 
-# ============================================
-# KONFIGURASI DAGSHUB + MLFLOW
-# ============================================
-
-DAGSHUB_USERNAME = os.environ.get("DAGSHUB_USERNAME", "USERNAME-DAGSHUB-ANDA")
+DAGSHUB_USERNAME = os.environ.get("DAGSHUB_USERNAME", "iqbalrza")
 REPO_NAME        = "Workflow-CI_MuhamadIqbalReza"
 EXPERIMENT_NAME  = "Telco Churn CI Pipeline"
 
@@ -37,10 +33,6 @@ dagshub.init(
 
 mlflow.set_experiment(EXPERIMENT_NAME)
 
-# ============================================
-# LOAD DATA
-# ============================================
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "telco_churn_preprocessing")
 
@@ -50,10 +42,6 @@ y_train = pd.read_csv(os.path.join(DATA_DIR, "y_train.csv")).squeeze()
 y_test  = pd.read_csv(os.path.join(DATA_DIR, "y_test.csv")).squeeze()
 
 print(f"Data loaded - Train: {X_train.shape}, Test: {X_test.shape}")
-
-# ============================================
-# TRAINING
-# ============================================
 
 with mlflow.start_run(run_name="CI_RandomForest"):
 
