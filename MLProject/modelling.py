@@ -43,12 +43,6 @@ y_test  = pd.read_csv(os.path.join(DATA_DIR, "y_test.csv")).squeeze()
 
 print(f"Data loaded - Train: {X_train.shape}, Test: {X_test.shape}")
 
-
-run = mlflow.active_run()
-
-if run is None:
-    mlflow.start_run()
-    
 # Parameters
 n_estimators = int(os.environ.get("N_ESTIMATORS", 200))
 max_depth    = os.environ.get("MAX_DEPTH", "10")
