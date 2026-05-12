@@ -21,12 +21,12 @@ from sklearn.metrics import (
     recall_score, f1_score, roc_auc_score
 )
 
-DAGSHUB_USERNAME = os.environ.get("DAGSHUB_USERNAME", "iqbalrza")
-REPO_NAME        = "Workflow-CI_MuhamadIqbalReza"
-EXPERIMENT_NAME  = "Telco Churn CI Pipeline"
+REPO_OWNER = "iqbalrza"
+REPO_NAME = "Workflow-CI_MuhamadIqbalReza"
+EXPERIMENT_NAME = "Telco Churn CI Pipeline"
 
 dagshub.init(
-    repo_owner=DAGSHUB_USERNAME,
+    repo_owner=REPO_OWNER,
     repo_name=REPO_NAME,
     mlflow=True
 )
@@ -81,7 +81,7 @@ with mlflow.start_run(run_name="CI_RandomForest"):
 
     # Log model
     mlflow.sklearn.log_model(
-        sk_model=best_model if 'best_model' in dir() else model,
+        sk_model=model,
         artifact_path="model"
     )
 
