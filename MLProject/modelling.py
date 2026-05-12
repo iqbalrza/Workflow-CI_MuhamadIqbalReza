@@ -14,23 +14,23 @@ import os
 import pandas as pd
 import mlflow
 import mlflow.sklearn
-import dagshub
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
     accuracy_score, precision_score,
     recall_score, f1_score, roc_auc_score
 )
 
-DAGSHUB_USERNAME = os.environ.get("DAGSHUB_USERNAME", "iqbalrza")
-REPO_NAME        = "Workflow-CI_MuhamadIqbalReza"
-EXPERIMENT_NAME  = "Telco Churn CI Pipeline"
-
-dagshub.init(
-    repo_owner=DAGSHUB_USERNAME,
-    repo_name=REPO_NAME,
-    mlflow=True
+TRACKING_URI = os.environ.get(
+    "MLFLOW_TRACKING_URI",
+    f"https://dagshub.com/iqbalrza/Workflow-CI_MuhamadIqbalReza.mlflow"
 )
 
+mlflow.set_tracking_uri(TRACKING_URI)
+
+os.environ["MLFLOW_TRACKING_USERNAME"] = os.environ.get("DAGSHUB_USERNAME", "iqbalrza")
+os.environ["MLFLOW_TRACKING_PASSWORD"] = os.environ.get("DAGSHUB_TOKEN", "")
+
+EXPERIMENT_NAME = "Telco Churn CI Pipeline"
 mlflow.set_experiment(EXPERIMENT_NAME)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
