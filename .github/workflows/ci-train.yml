@@ -42,7 +42,7 @@ jobs:
         env:
           DAGSHUB_USER_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
-          echo "MLFLOW_TRACKING_URI=https://dagshub.com/${{ secrets.DOCKER_USERNAME }}/Workflow-CI_MuhamadIqbalReza.mlflow" >> $GITHUB_ENV
+          echo "MLFLOW_TRACKING_URI=https://dagshub.com/${{ secrets.DAGSHUB_USERNAME }}/Workflow-CI_MuhamadIqbalReza.mlflow" >> $GITHUB_ENV
           echo "DAGSHUB_USER_TOKEN=${{ secrets.DAGSHUB_TOKEN }}" >> $GITHUB_ENV
 
       - name: Run mlflow project
