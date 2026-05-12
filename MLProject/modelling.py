@@ -43,52 +43,52 @@ y_test  = pd.read_csv(os.path.join(DATA_DIR, "y_test.csv")).squeeze()
 
 print(f"Data loaded - Train: {X_train.shape}, Test: {X_test.shape}")
 
-with mlflow.start_run(run_name="CI_RandomForest"):
+mlflow.set_tag("mlflow.runName", "CI_RandomForest")
 
-    # Parameters
-    n_estimators = int(os.environ.get("N_ESTIMATORS", 200))
-    max_depth    = os.environ.get("MAX_DEPTH", "10")
-    max_depth    = None if max_depth == "None" else int(max_depth)
-    random_state = 42
+# Parameters
+n_estimators = int(os.environ.get("N_ESTIMATORS", 200))
+max_depth    = os.environ.get("MAX_DEPTH", "10")
+max_depth    = None if max_depth == "None" else int(max_depth)
+random_state = 42
 
-    mlflow.log_param("n_estimators",  n_estimators)
-    mlflow.log_param("max_depth",     max_depth)
-    mlflow.log_param("random_state",  random_state)
+mlflow.log_param("n_estimators",  n_estimators)
+mlflow.log_param("max_depth",     max_depth)
+mlflow.log_param("random_state",  random_state)
 
-    # Training
-    model = RandomForestClassifier(
-        n_estimators=n_estimators,
-        max_depth=max_depth,
-        random_state=random_state
-    )
-    model.fit(X_train, y_train)
+# Training
+model = RandomForestClassifier(
+    n_estimators=n_estimators,
+    max_depth=max_depth,
+    random_state=random_state
+)
+model.fit(X_train, y_train)
 
-    # Evaluasi
-    y_pred      = model.predict(X_test)
-    y_pred_prob = model.predict_proba(X_test)[:, 1]
+# Evaluasi
+y_pred      = model.predict(X_test)
+y_pred_prob = model.predict_proba(X_test)[:, 1]
 
-    accuracy  = accuracy_score(y_test, y_pred)
-    precision = precision_score(y_test, y_pred)
-    recall    = recall_score(y_test, y_pred)
-    f1        = f1_score(y_test, y_pred)
-    roc_auc   = roc_auc_score(y_test, y_pred_prob)
+accuracy  = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall    = recall_score(y_test, y_pred)
+f1        = f1_score(y_test, y_pred)
+roc_auc   = roc_auc_score(y_test, y_pred_prob)
 
-    mlflow.log_metric("accuracy",   accuracy)
-    mlflow.log_metric("precision",  precision)
-    mlflow.log_metric("recall",     recall)
-    mlflow.log_metric("f1_score",   f1)
-    mlflow.log_metric("roc_auc",    roc_auc)
+mlflow.log_metric("accuracy",   accuracy)
+mlflow.log_metric("precision",  precision)
+mlflow.log_metric("recall",     recall)
+mlflow.log_metric("f1_score",   f1)
+mlflow.log_metric("roc_auc",    roc_auc)
 
-    # Log model
-    mlflow.sklearn.log_model(
-        sk_model=model,
-        artifact_path="model"
-    )
+# Log model
+mlflow.sklearn.log_model(
+    sk_model=model,
+    artifact_path="model"
+)
 
-    run_id = mlflow.active_run().info.run_id
-    print(f"\nRun ID: {run_id}")
-    print(f"Accuracy : {accuracy:.4f}")
-    print(f"F1-Score : {f1:.4f}")
-    print(f"ROC-AUC  : {roc_auc:.4f}")
+run_id = mlflow.active_run().info.run_id
+print(f"\nRun ID: {run_id}")
+print(f"Accuracy : {accuracy:.4f}")
+print(f"F1-Score : {f1:.4f}")
+print(f"ROC-AUC  : {roc_auc:.4f}")
 
 print("\nTraining selesai!")
